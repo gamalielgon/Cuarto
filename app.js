@@ -51,11 +51,23 @@ console.log(`${cuadrado2(5)}`);
 let cuadrado3 = z => z * z;
 console.log(`${cuadrado3(3)}`);
 
-//Refactor de los 3 saludos del principio en con los parametros de ES6 que aprendí
+//Refactor de loting2s 3 saludos del principio en con los parametros de ES6 que aprendí
 let greet2 = () => console.log(`Saludos guardian`);
 greet2();
-let logGreeting2 = fn => fn();
-logGreeting2(greet2);
+let logGree = fn => fn();
+logGreeting(greet2);
 let greetMe2 = () => console.log(`Los arboles te saludan desde greetMe2`);
 greetMe2();
 
+//Actividad #3, reestructuramos el log greeting para hacerlo una funcion 
+// "funtion expression created on the fly"
+let logGreeting3 = (miParametro) => miParametro();
+logGreeting3(function (){
+    console.log(`Hello from a funtion created on the fly`)
+});
+
+//interpolacion de strings "clasica"
+let logGreeting4 = (miNombre, miColor) => {
+    console.log(`Hola ${miNombre} buenos días! Tu color favorito es el ${miColor}`);
+}
+logGreeting4(`Juna`, `Rojo`);
