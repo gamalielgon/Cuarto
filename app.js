@@ -1,61 +1,38 @@
-//funcion basica
-/* greet() {
-    console.log(`Aloja primo!`);
-} 
-greet(); //invoke
-*/
-let greet = () => 
-    console.log(`Hola muy buenas tardes`);
-greet();
-//functions como parametro
-function logGreeting(fn) {
-    fn();
-};
-logGreeting(greet);
+//var Emitter = require('./emitter');
+var config = require('./config');
+var Emitter = require('events');
+//en la consola se ve que todo funciona bien y correcto
+// cambiaron algunas cosas como los nombres, y se agregaron otros eventos
+var emtr = new Emitter();
 
-//v1 funcion donde no necesitas declarar la variable "Let"
-logGreeting(function(){console.log(`Hola buenas`)});
-//v2 funcion ES6
-logGreeting(()=>{console.log(`Si funciono`)});
+emtr.on(config.events.GREET, () => {
+    console.log('Somewhere, someone said hello.');
+});
 
-//probando los backticks
-let x = 2;
-console.log(`Hola ${x} veces
-Ira esta cosa salta lineas`);
+emtr.on(config.events.GREET, () => {
+    console.log('A greeting occurred!');
+});
 
-//funtion expression
-let greetMe = function () {
-    console.log('La marea es alta en la funcion expression');
-}
-greetMe();
-logGreeting(greetMe);
+console.log('Hello!');
+emtr.emit(config.events.GREET);
+// lo que hicimos fue instanciar el "emisor de eventos"
+// a este emisor le agregamos 2 funciones
+// luego con el log mandamos un hola y luego llamamos a las funciones greet
+// las cuales devuelven el saludo
 
-//probando funciones con parametros ES6 donde podemos sacar el cuadrado de cualquier numero
-let cuadrado = (x) => x*x;
-console.log(`${cuadrado(4)}`);
-cuadrado();
+emtr.on(config.events.JUMP, () => {
+    console.log('someone jumped!');
+});
 
-//Funcion de saludo donde se resive el nombre y el tratamiento
-//en las funciones de fat arrow se resiven parametros igual que en las normales
-//podemos no usar las llaves si solo tenemos una linea de codigo
-let saludo = (nombre, tratamiento) => console.log(`Buen día ${tratamiento}. ${nombre}`);
-saludo(`Juan`, `Sr`);
+console.log(emtr);
+emtr.emit(config.events.JUMP);
 
-// cuando hay un unico parametro se puede ahorrar el parentesis
-let cuadrado2 = y => {
-    return y * y;
-}
-console.log(`${cuadrado2(5)}`);
-
-//Otra forma de abreviarlo es quitando los parentesis y sin agregar un return, si solo devuelve un valor
-let cuadrado3 = z => z * z;
-console.log(`${cuadrado3(3)}`);
-
-//Refactor de los 3 saludos del principio en con los parametros de ES6 que aprendí
-let greet2 = () => console.log(`Saludos guardian`);
-greet2();
-let logGreeting2 = fn => fn();
-logGreeting2(greet2);
-let greetMe2 = () => console.log(`Los arboles te saludan desde greetMe2`);
-greetMe2();
-
+/* lo que arroja este codigo es la forma que tiene emtr
+emtr tiene dos eventos llamados greet ambas dentro del mismo array 
+y otro evento llamado jump, que esta en un array diferente.
+Ya que he hecho los cambios con el config, cambie todas las
+strings a llamadas al archivo config, para evitar el error.
+Lo que sucede en la terminal, es que todo funciona perfectamente
+ya que lo que antes era un string, ahora es una llamada a una string
+pero, si quisiera cambiarlo, solo tengo que cambiar el texto en 
+el config */
