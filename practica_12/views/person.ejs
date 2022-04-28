@@ -1,8 +1,37 @@
-<html>
-    <head>
-        <link href="/assets/style.css" type="text/css" rel="stylesheet" />
-    </head>
-    <body>
-        <h1>Person: <%= ID %></h1>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Document</title>
+</head>
+<body>
+    <h1>Person Name: <%= ID %></h1>
+    <switch>
+    <% switch (Msg) {
+        case 'Bienvenido': %>
+        <h2>Mensaje: Bienvenido</h2>
+        <% break;
+
+        case 'Hola': %>
+        <h2>Mensaje: Hola</h2>
+        <% break;
+
+        case 'Adios': %>
+        <h2>Mensaje: Adios</h2>
+        <% break;
+    } %>
+    </switch>
+    <if>
+        <% if(Tm%1==0){ %>
+            <% for(let i = 1; i <= Tm; i++){ %>
+                <h3><%= Msg %> <%= ID %></h3>
+            <% } %>
+            <% } else{ %>
+            <h3>Dame un numero valido</h3>
+          <% } %>
+    </if>
+        
+</body>
 </html>
